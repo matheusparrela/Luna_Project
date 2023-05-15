@@ -52,7 +52,7 @@ class CurvaEmpuxo:
         return max(self.y)
 
     def empuxo_med(self):
-        return self.impulso_total()/max(self.x)
+        return self.impulso_total()/(self.x[-1]-self.x[0])
 
     def velociadade_media_gases(self):
         return self.impulso_total()/self.prop_massa
@@ -61,4 +61,4 @@ class CurvaEmpuxo:
         return self.impulso_total()/(self.prop_massa*self.GRAVIDADE)
 
     def fluxo_massa_med(self):
-        return self.prop_massa/max(self.x)
+        return self.prop_massa/(self.x[-1]-self.x[0])
