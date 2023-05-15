@@ -1,5 +1,7 @@
 import CurvaEmpuxo as ce
 
+file = 'teste.txt'  # Arquivo de dados
+min = 0.05          # Empuxo mínimo para definir o início e fim da curva (N)
 
-Empuxo = ce.CurvaEmpuxo('teste.txt')
-Empuxo.impulso_total()
+empuxo = ce.CurvaEmpuxo(file, min)
+print('Impulso Total:', empuxo.impulso_total())
