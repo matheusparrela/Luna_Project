@@ -15,5 +15,5 @@ print('Impulso Específico Médio:', empuxo.impulso_especifico_med())
 print('Fluxo de Massa Médio:', empuxo.fluxo_massa_med())
 
 
-PDF = gp.GerarPDF(0)
-PDF.file_pdf()
+gerador = gp.GerarPDF(0)  # Substitua 'a' pelo valor que você precisa
+gerador.cabecalho()  # Gera o documento PDF com o cabeçalho centralizado
