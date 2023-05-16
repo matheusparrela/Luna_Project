@@ -3,12 +3,12 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle, Image
 from reportlab.lib import colors
 import datetime
-
-
+import CurvaEmpuxo as ce
 
 class GerarPDF:
-    def __init__(self, a, grafico):
-        self.a = a
+    def __init__(self, a, grafico, empuxo_table):
+
+        self.empuxo_table = empuxo_table
         self.doc = SimpleDocTemplate("documento.pdf", pagesize=A4)
         self.styles = getSampleStyleSheet()
         self.conteudo = []
@@ -60,7 +60,6 @@ class GerarPDF:
         observacoes = Paragraph(f"OBSERVAÇÔES: {self.obs}", self.esquerda)
         self.conteudo.append(observacoes)
 
-
         # Construir o documento PDF
         self.doc.build(self.conteudo)
 
@@ -70,13 +69,11 @@ class GerarPDF:
         imagem = Image(self.img_grafico, width=350, height=300)
         self.conteudo.append(imagem)
 
-
     def table(self):
-
-        # Cria o documento PDF
 
         # Dados da tabela
         dados = [["PROPRIEDADE", "VALOR", "UNIDADE"]]
+        dados.extend(self.empuxo_table)
 
         '''
         Colocar os valores que foram encontrados em CurvaEmpuxo 
@@ -103,4 +100,3 @@ class GerarPDF:
         tabela.setStyle(estilo_tabela)
         # Adiciona a tabela ao conteúdo do documento
         self.conteudo.append(tabela)
-
