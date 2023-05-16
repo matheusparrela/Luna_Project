@@ -1,13 +1,13 @@
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle, Image
 from reportlab.lib import colors
 import datetime
 
 
 
 class GerarPDF:
-    def __init__(self, a):
+    def __init__(self, a, grafico):
         self.a = a
         self.doc = SimpleDocTemplate("documento.pdf", pagesize=A4)
         self.styles = getSampleStyleSheet()
@@ -15,6 +15,7 @@ class GerarPDF:
         self.cidade = 'Senador Carneiro'
         self.estado = 'KT'
         self.nome = "BT-8"
+        self.img_grafico = "grafico.png"
         self.obs = "Nada a Declarar"
         self.centralizado = ParagraphStyle("estilo_centralizado",
                                             parent=self.styles["Normal"],
@@ -49,8 +50,11 @@ class GerarPDF:
         paragrafo_com_linha = Paragraph(linha_vertical, self.centralizado)
         self.conteudo.append(paragrafo_com_linha)
 
-        self.conteudo.append(Spacer(1, 250))
+        self.conteudo.append(Spacer(1, 50))
         self.table()
+        self.conteudo.append(Spacer(1, 50))
+
+        self.grafico()
         self.conteudo.append(Spacer(1, 50))
 
         observacoes = Paragraph(f"OBSERVAÇÔES: {self.obs}", self.esquerda)
@@ -59,6 +63,12 @@ class GerarPDF:
 
         # Construir o documento PDF
         self.doc.build(self.conteudo)
+
+    def grafico(self):
+
+        # Adicionar a imagem ao conteúdo do documento
+        imagem = Image(self.img_grafico, width=350, height=300)
+        self.conteudo.append(imagem)
 
 
     def table(self):
@@ -89,7 +99,6 @@ class GerarPDF:
 
         # Cria a tabela
         tabela = Table(dados)
-
         # Aplica o estilo à tabela
         tabela.setStyle(estilo_tabela)
         # Adiciona a tabela ao conteúdo do documento

@@ -1,6 +1,7 @@
 import CurvaEmpuxo as ce
 import GerarPDF as gp
 
+
 file = 'teste.txt'  # Arquivo de dados
 min = 0.05          # Empuxo mínimo para definir o início e fim da curva (N)
 massa = 0.002542    # Massa de propelente (kg)
@@ -15,5 +16,5 @@ print('Impulso Específico Médio:', empuxo.impulso_especifico_med())
 print('Fluxo de Massa Médio:', empuxo.fluxo_massa_med())
 
 
-gerador = gp.GerarPDF(0)  # Substitua 'a' pelo valor que você precisa
+gerador = gp.GerarPDF(0, 0)  # Substitua 'a' pelo valor que você precisa
 gerador.cabecalho()  # Gera o documento PDF com o cabeçalho centralizado
