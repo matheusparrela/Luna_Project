@@ -3,19 +3,18 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, HRFlowable, Table, TableStyle, Image
 from reportlab.lib import colors
 import datetime
-import CurvaEmpuxo as ce
 
 class GerarPDF:
     def __init__(self, a, grafico, empuxo_table):
 
         self.empuxo_table = empuxo_table
-        self.doc = SimpleDocTemplate("documento.pdf", pagesize=A4)
+        self.doc = SimpleDocTemplate("files/documento.pdf", pagesize=A4)
         self.styles = getSampleStyleSheet()
         self.conteudo = []
         self.cidade = 'Senador Carneiro'
         self.estado = 'KT'
         self.nome = "BT-8"
-        self.img_grafico = "grafico.png"
+        self.img_grafico = "img/grafico.png"
         self.obs = "Nada a Declarar"
         self.centralizado = ParagraphStyle("estilo_centralizado",
                                             parent=self.styles["Normal"],

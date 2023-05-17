@@ -47,7 +47,7 @@ class CurvaEmpuxo:
         plt.ylabel('Eixo Y')
         plt.title('Curva')
 
-        plt.savefig('grafico.png')
+        plt.savefig('img/grafico.png')
 
     def empuxo_max(self):
         return self.table.append(['Empuxo Máximo', np.round(max(self.y), decimals=3), 'N'])
