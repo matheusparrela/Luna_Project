@@ -18,7 +18,6 @@ class CurvaEmpuxo:
             if self.y[i] < self.min_empuxo:
                 self.x = np.delete(self.x, i)
                 self.y = np.delete(self.y, i)
-        print(self.x[0], self.x[-1])
 
     def impulso_total(self):
 
@@ -37,7 +36,7 @@ class CurvaEmpuxo:
             soma = soma + soma1
             n = n + 3
 
-        return self.table.append(['Impulso Total', np.round(soma, decimals=3), 'N*s'])
+        return self.table.append(['Impulso Total', float(np.round(soma, decimals=3)), 'N*s'])
 
     def grafico(self):
 
@@ -50,62 +49,62 @@ class CurvaEmpuxo:
         plt.savefig('img/grafico.png')
 
     def empuxo_max(self):
-        return self.table.append(['Empuxo Máximo', np.round(max(self.y), decimals=3), 'N'])
+        return self.table.append(['Empuxo Máximo', float(np.round(max(self.y), decimals=3)), 'N'])
 
     def empuxo_min(self):
-        return self.table.append(['Empuxo Máximo', np.round(min(self.y), decimals=3), 'N'])
+        return self.table.append(['Empuxo Mínimo', float(np.round(min(self.y), decimals=3)), 'N'])
 
     def empuxo_med(self):
         return self.table.append(['Empuxo Médio',
-                                  np.round(self.table[0][1] / (self.x[-1]-self.x[0]), decimals=3),
+                                  float(np.round(self.table[0][1] / (self.x[-1]-self.x[0]), decimals=3)),
                                   'N'])
 
     def tempo_max_empuxo(self):
         max_value = np.max(self.y)
         return self.table.append(['Tempo Original de Empuxo Máximo',
-                                  np.round(self.x[np.where(self.y == max_value)[0]][0], decimals=3),
+                                  float(np.round(self.x[np.where(self.y == max_value)[0]][0], decimals=3)),
                                   's'])
 
     def tempo_max_empuxo_corrigido(self):
         max_value = np.max(self.y)
         self.table.append(['Tempo Original de Empuxo Máximo Corrigido',
-                           np.round(self.x[np.where(self.y == max_value)[0]][0] - min(self.x), decimals=3),
+                           float(np.round(self.x[np.where(self.y == max_value)[0]][0] - min(self.x), decimals=3)),
                            's'])
 
     def tempo_init(self):
-        return self.table.append(['Tempo Original Inicial', np.round(min(self.x), decimals=3), 's'])
+        return self.table.append(['Tempo Original Inicial', float(float(np.round(min(self.x), decimals=3))), 's'])
 
     def tempo_fim(self):
-        return self.table.append(['Tempo Original Final', np.round(max(self.x), decimals=3), 's'])
+        return self.table.append(['Tempo Original Final', float(np.round(max(self.x), decimals=3)), 's'])
 
     def tempo_queima(self):
         return self.table.append(['Tempo de Queima',
-                                  np.round(max(self.x)-min(self.x), decimals=3),
+                                  float(np.round(max(self.x)-min(self.x), decimals=3)),
                                   's'])
 
     def velociadade_media_gases(self):
         return self.table.append(['Velocidade Média de Ejeção dos Gases',
-                                  np.round(self.table[0][1]/self.prop_massa, decimals=3),
+                                  (np.round(self.table[0][1]/self.prop_massa, decimals=3)),
                                   'm/s'])
 
     def impulso_especifico_med(self):
         return self.table.append(['Impulso Específico Média',
-                                  np.round(self.table[0][1] / (self.prop_massa * self.GRAVIDADE), decimals=3),
+                                  float(np.round(self.table[0][1] / (self.prop_massa * self.GRAVIDADE), decimals=3)),
                                   's'])
 
     def fluxo_massa_med(self):
         return self.table.append(['Fluxo de Massa Média',
-                                  np.round(self.prop_massa / (self.x[-1]-self.x[0]), decimals=3),
+                                  float(np.round(self.prop_massa / (self.x[-1]-self.x[0]), decimals=3)),
                                   'Kg/s'])
 
     def relacao_maxemp_empumed(self):
         return self.table.append(['Razão Empuxo Máximo e Empuxo Médio',
-                                  np.round((max(self.y) / (self.table[0][1] / (self.x[-1]-self.x[0])))*100, decimals=3),
+                                  float(np.round((max(self.y) / (self.table[0][1] / (self.x[-1]-self.x[0])))*100, decimals=3)),
                                   '%'])
 
     def relacao_empmin_empmax(self):
         return self.table.append(['Razão Empuxo Mínimo e Empuxo Máximo',
-                                  np.round((min(self.y) / max(self.y))*100, decimals=3),
+                                  float(np.round((min(self.y) / max(self.y))*100, decimals=3)),
                                   '%'])
 
     def all(self):
@@ -123,4 +122,4 @@ class CurvaEmpuxo:
         self.fluxo_massa_med()
         self.relacao_maxemp_empumed()
         self.relacao_empmin_empmax()
-        self.grafico()
+        #self.grafico()
