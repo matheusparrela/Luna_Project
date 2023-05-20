@@ -1,14 +1,12 @@
-from PySide2.QtWidgets import QApplication, QMainWindow
-
+from PySide2.QtWidgets import QApplication, QMainWindow, QFileDialog
 from MainWindow import MainWindow
+import sys
 
-app = QApplication([])
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    main_window = QMainWindow()
+    ui = MainWindow()
+    ui.setupUi(main_window)
+    main_window.show()
 
-main_window = QMainWindow()
-
-ui = MainWindow()
-ui.setupUi(main_window)
-
-main_window.show()
-
-app.exec_()
+    sys.exit(app.exec_())

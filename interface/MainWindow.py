@@ -79,22 +79,28 @@ class MainWindow(object):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setGeometry(QRect(460, 90, 121, 20))
 
+        # Explorador de Arquivos
+        self.label = QLabel(self.frame_2)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(10, 10, 101, 21))
+
         self.lineEdit = QLineEdit(self.frame_2)
         self.lineEdit.setObjectName(u"lineEdit")
         self.lineEdit.setGeometry(QRect(110, 10, 651, 25))
 
-        self.pushButton = QPushButton(self.frame_2)
+        self.layout = QVBoxLayout()
+        self.pushButton = QPushButton("Selecionar Arquivo", self.frame_2)
+        self.pushButton.clicked.connect(self.show_file_dialog)
+        self.layout.addWidget(self.pushButton)
         self.pushButton.setObjectName(u"pushButton")
         self.pushButton.setGeometry(QRect(760, 10, 89, 25))
 
-        self.label = QLabel(self.frame_2)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(10, 10, 101, 21))
 
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
+
 
         MainWindow.setStatusBar(self.statusbar)
         MainWindow.setStatusBar(self.statusbar)
@@ -106,9 +112,22 @@ class MainWindow(object):
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
+
+
+    def show_file_dialog(self):
+
+        file_dialog = QFileDialog()
+        file_dialog.setFileMode(QFileDialog.AnyFile)
+
+        if file_dialog.exec_() == QFileDialog.Accepted:
+            file_paths = file_dialog.selectedFiles()
+            if file_paths:
+                self.lineEdit.setText(file_paths[0])
+
+
     def gerarGrafico(self):
 
-        file = '../curvaDeEmpuxo/files/teste.txt'  # Arquivo de dados
+        file = str(self.lineEdit.text())  # Arquivo de dados
         min = float(self.lineEdit_3.text())  # Empuxo mínimo para definir o início e fim da curva (N)
         massa = float(self.lineEdit_2.text())  # Massa de propelente (kg)
         Empuxo = ce.CurvaEmpuxo(file, min, massa)
