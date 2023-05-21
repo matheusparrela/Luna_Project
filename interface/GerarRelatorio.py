@@ -14,6 +14,7 @@ from PySide2.QtWidgets import QTabWidget
 
 
 class Ui_Dialog(object):
+
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
@@ -44,10 +45,16 @@ class Ui_Dialog(object):
         self.lineEdit_8 = QLineEdit(self.tab)
         self.lineEdit_8.setObjectName(u"lineEdit_8")
         self.lineEdit_8.setGeometry(QRect(70, 40, 511, 25))
+
+        #Botões de Ok e Cancelar - Relatório Simples
         self.buttonBox = QDialogButtonBox(self.tab)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(410, 490, 171, 25))
         self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.accepted.connect(Dialog.accept)
+        self.buttonBox.rejected.connect(Dialog.reject)
+
+
         self.lineEdit_9 = QLineEdit(self.tab)
         self.lineEdit_9.setObjectName(u"lineEdit_9")
         self.lineEdit_9.setGeometry(QRect(60, 130, 521, 25))
@@ -146,10 +153,15 @@ class Ui_Dialog(object):
         self.doubleSpinBox_4 = QDoubleSpinBox(self.tab_2)
         self.doubleSpinBox_4.setObjectName(u"doubleSpinBox_4")
         self.doubleSpinBox_4.setGeometry(QRect(260, 190, 65, 26))
+
+        # Botões de Ok e Cancelar - Relatório Completo
         self.buttonBox_2 = QDialogButtonBox(self.tab_2)
         self.buttonBox_2.setObjectName(u"buttonBox_2")
         self.buttonBox_2.setGeometry(QRect(420, 490, 166, 25))
-        self.buttonBox_2.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox_2.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
+        self.buttonBox_2.accepted.connect(Dialog.accept)
+        self.buttonBox_2.rejected.connect(Dialog.reject)
+
         self.label_35 = QLabel(self.tab_2)
         self.label_35.setObjectName(u"label_35")
         self.label_35.setGeometry(QRect(340, 40, 121, 21))
