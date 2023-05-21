@@ -12,7 +12,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 import curvaDeEmpuxo.CurvaEmpuxo as ce
-import numpy
+from GerarRelatorioDialog import GerarRelatorioDialog
 
 class MainWindow(object):
     def setupUi(self, MainWindow):
@@ -57,10 +57,6 @@ class MainWindow(object):
         self.tableWidget.setObjectName(u"tableWidget")
         self.tableWidget.setGeometry(QRect(0, 0, 811, 421))
         self.tabWidget.addTab(self.tab_2, "")
-
-        self.pushButton_3 = QPushButton(self.frame)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setGeometry(QRect(730, 430, 121, 21))
 
         self.frame_2 = QFrame(self.centralwidget)
         self.frame_2.setObjectName(u"frame_2")
@@ -136,14 +132,22 @@ class MainWindow(object):
         self.menuSobre.addAction(self.actionCr_ditos)
         self.menuSobre.addAction(self.actionCdigo_Fonte)
 
+        # Botão de Geração de Relatório
+        self.pushButton_3 = QPushButton(self.frame)
+        self.pushButton_3.setObjectName(u"pushButton_3")
+        self.pushButton_3.setGeometry(QRect(730, 430, 121, 21))
+        self.pushButton_3.clicked.connect(self.abrir_gerar_relatorio)
+
         self.retranslateUi(MainWindow)
-
         self.tabWidget.setCurrentIndex(0)
-
-
         QMetaObject.connectSlotsByName(MainWindow)
+
+
     # setupUi
 
+    def abrir_gerar_relatorio(self):
+        self.secondary_window = GerarRelatorioDialog()
+        self.secondary_window.exec_()
 
     def show_file_dialog(self):
 
@@ -190,6 +194,8 @@ class MainWindow(object):
                 self.tableWidget.setItem(row, col, item)
 
         self.tableWidget.resizeColumnsToContents()
+
+
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Curva de Empuxo", None))

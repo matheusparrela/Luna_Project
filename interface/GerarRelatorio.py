@@ -9,8 +9,8 @@
 ################################################################################
 
 from PySide2.QtCore import *
-from PySide2.QtGui import *
 from PySide2.QtWidgets import *
+from PySide2.QtWidgets import QTabWidget
 
 
 class Ui_Dialog(object):
@@ -203,11 +203,9 @@ class Ui_Dialog(object):
         self.tabWidget.addTab(self.tab_2, "")
 
         self.retranslateUi(Dialog)
-
         self.tabWidget.setCurrentIndex(0)
-
-
         QMetaObject.connectSlotsByName(Dialog)
+
     # setupUi
 
     def retranslateUi(self, Dialog):
